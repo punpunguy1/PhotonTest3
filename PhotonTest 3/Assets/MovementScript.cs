@@ -7,7 +7,10 @@ using Photon.Pun;
 
 public class MovementScript : MonoBehaviour
 {
-    
+    //animation
+    public Animator animator;
+    public GameObject animsprite;
+
     //respawn
     public GameObject respawnmenu;
     public bool alive;
@@ -26,7 +29,14 @@ public class MovementScript : MonoBehaviour
     public GameObject pfbullet;
     private bool fireReady;
     private float wait;
+    private float waitS;
     public float firedelay;
+    private bool fireReady2;
+    public float specialdelay;
+
+    public Transform specialpoint;
+    public GameObject pfspecial;
+    public float specialforce;
     
 
     //aim calc
@@ -112,7 +122,8 @@ public class MovementScript : MonoBehaviour
         spread.y = spread.y + (Random.Range(-1, 1) * bulletspread);
         Debug.Log(spread);
         rbullet.AddForce(firepoint.up.normalized * bulletForce, ForceMode2D.Force);
-        Debug.Log("pew");
+        animator.SetTrigger("Attack");
+        //Debug.Log("pew");
     }
     void Fire1()
     {
@@ -137,9 +148,54 @@ public class MovementScript : MonoBehaviour
 
 
     }
+    void SpecialAttack()
+    {
+
+        bool fire = Input.GetButton("Fire2");
+        if (fire == true)
+        {
+            if (fireReady2)
+            {
+                animator.SetBool("EnteringSpecial", true);
+                Debug.Log("specialattack");
+                FireSpecial();
+                waitS = specialdelay;
+                
+            }
+
+
+        }
+        else
+        {
+            fireReady2 = true;
+            animator.SetBool("SpecialAttacking", false);
+        }
+
+
+    }
+    void FireSpecial()
+    {
+        
+        animator.SetBool("SpecialAttacking", true);
+        if (animsprite.GetComponent<AnimationEventTrigger>().specialattacking){
+            animator.SetBool("EnteringSpecial", false);
+            Debug.Log("firespecial");
+            GameObject bullet = PhotonNetwork.Instantiate(pfspecial.name, specialpoint.position, specialpoint.rotation);
+            Rigidbody2D rbullet = bullet.GetComponent<Rigidbody2D>();
+
+            spread = specialpoint.up;
+            spread.x = spread.x + (Random.Range(-1, 1) * bulletspread);
+            spread.y = spread.y + (Random.Range(-1, 1) * bulletspread);
+            Debug.Log(spread);
+            rbullet.AddForce(spread * specialforce, ForceMode2D.Force);
+            
+
+        }
+    }
     void ProcessInputs()
     {
         Fire1();
+        SpecialAttack();
         //mouse
         mouseP = cam.ScreenToWorldPoint(Input.mousePosition);
         playerP = rb.transform.position;
