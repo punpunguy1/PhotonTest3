@@ -11,6 +11,9 @@ public class MovementScript : MonoBehaviour
     public Animator animator;
     public GameObject animsprite;
 
+    //audio
+    public AudioSource whyhaveu;
+
     //respawn
     public GameObject respawnmenu;
     public bool alive;
@@ -156,7 +159,9 @@ public class MovementScript : MonoBehaviour
         {
             if (fireReady2)
             {
+                
                 animator.SetBool("EnteringSpecial", true);
+                
                 Debug.Log("specialattack");
                 FireSpecial();
                 waitS = specialdelay;
@@ -173,6 +178,7 @@ public class MovementScript : MonoBehaviour
 
 
     }
+    
     void FireSpecial()
     {
         
