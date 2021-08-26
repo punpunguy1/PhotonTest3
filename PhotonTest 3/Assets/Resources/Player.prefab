@@ -173,7 +173,7 @@ MonoBehaviour:
   specialdelay: 1
   specialpoint: {fileID: 2403024003160472683}
   pfspecial: {fileID: 5167601004890997555, guid: 4ffa58007b109c34096bedcf6b4e01f6, type: 3}
-  specialforce: 500
+  specialforce: 1000
   gun: {fileID: 5669199523464889701}
   rotation: 0
   gundis: 0.8
