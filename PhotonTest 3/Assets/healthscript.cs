@@ -17,11 +17,18 @@ public class healthscript : MonoBehaviour
     public GameObject enemy;
     public GameObject respawnmenu;
     public Text hpnumber;
+    public Text maxhp;
     public PhotonView pv;
+
+    //UI
+    public Slider hpbar;
+    public Slider cumbar;
 
     private void Awake()
     {
+        hpbar.maxValue = hp;
         hpi = hp;
+        maxhp.text = hp.ToString();
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -29,7 +36,7 @@ public class healthscript : MonoBehaviour
         {
 
             hpi = hpi - collision.relativeVelocity.magnitude;
-            hpnumber.text = hpi.ToString();
+            
             //Debug.Log(hpnumber.text);
         }
     }
@@ -37,6 +44,8 @@ public class healthscript : MonoBehaviour
     {
         if (pv.IsMine)
         {
+            hpnumber.text = hpi.ToString();
+            hpbar.value = hpi;
             if (hpi < 0)
             {
                 dead = true;
@@ -57,6 +66,6 @@ public class healthscript : MonoBehaviour
         dead = false;
         mainenemy.GetComponent<MovementScript>().respawn();
         respawnmenu.SetActive(false);
-        hpnumber.text = "full";
+        
     }
 }

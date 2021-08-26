@@ -206,6 +206,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 8144480658981581709}
   delay: 100
+  destroyoncollsion: 1
 --- !u!58 &2140686579664079491
 CircleCollider2D:
   m_ObjectHideFlags: 0

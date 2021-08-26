@@ -309,6 +309,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 7572186276675696059}
   delay: 100
+  destroyoncollsion: 0
 --- !u!1 &8909059203668756301
 GameObject:
   m_ObjectHideFlags: 0

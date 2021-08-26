@@ -7,6 +7,8 @@ using Photon.Pun;
 
 public class MovementScript : MonoBehaviour
 {
+    
+
     //animation
     public Animator animator;
     public GameObject animsprite;

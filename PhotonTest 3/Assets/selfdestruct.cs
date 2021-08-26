@@ -7,12 +7,16 @@ public class selfdestruct : MonoBehaviour
 {
     public PhotonView bullet;
     public float delay;
+    public bool destroyoncollsion;
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (!(collision.gameObject.tag == "bullet"))
         {
-
-            PhotonNetwork.Destroy(bullet);
+            if (destroyoncollsion)
+            {
+                PhotonNetwork.Destroy(bullet);
+            }
+            
         }
     }
     private void Awake()
