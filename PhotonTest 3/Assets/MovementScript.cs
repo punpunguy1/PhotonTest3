@@ -186,7 +186,7 @@ public class MovementScript : MonoBehaviour
             spread = specialpoint.up;
             spread.x = spread.x + (Random.Range(-1, 1) * bulletspread);
             spread.y = spread.y + (Random.Range(-1, 1) * bulletspread);
-            Debug.Log(spread);
+            //Debug.Log(spread);
             rbullet.AddForce(spread * specialforce, ForceMode2D.Force);
             
 
