@@ -42,7 +42,20 @@ public class MovementScript : MonoBehaviour
     public Transform specialpoint;
     public GameObject pfspecial;
     public float specialforce;
+    public float spermAmmo;
+    private float spermCount;
+    public float spermRate;
+    public float orgiballValue;
+    private int orgiballCount;
+
+    //ui
+    public Slider cumbar;
+    public Text spermcountnum;
+    public Text spermammonum;
     
+    public Text orgiballcounter;
+
+   
 
     //aim calc
     public Rigidbody2D gun;
@@ -63,13 +76,19 @@ public class MovementScript : MonoBehaviour
     //photon
     public PhotonView view;
 
+    //skills
+    private bool[] skillready;
+
 
     private void Start()
     {
         view = GetComponent<PhotonView>();
         if (view.IsMine)
         {
+            orgiballCount = 0;
             playercam.SetActive(true);
+            spermCount = spermAmmo;
+            cumbar.maxValue = spermAmmo;
         }
         alive = true;
     }
@@ -80,6 +99,10 @@ public class MovementScript : MonoBehaviour
     public void respawn()
     {
         alive = true;
+    }
+    private void Update()
+    {
+        UpdateUI();
     }
     private void FixedUpdate()
     {
@@ -92,13 +115,23 @@ public class MovementScript : MonoBehaviour
                 GunMechanics();
                 ProcessInputs();
                 Move();
+                AutoRecharge();
             }
             
             MoveCam();
             
         } 
     }
-  
+    public void PickUpBall()
+    {
+        spermRate = spermRate + orgiballValue;
+        orgiballCount = orgiballCount + 1;
+        Debug.Log("picked up ball");
+    }
+    void Skills()
+    {
+      
+    }
     void Look()
     {
         lookDir = mouseP - rb.position;
@@ -117,15 +150,16 @@ public class MovementScript : MonoBehaviour
         gunpos[1] = gunpos[1] + view.transform.position.y;
         gun.position = gunpos;
     }
-    void firebullet()
+    private void firebullet()
     {
         GameObject bullet = PhotonNetwork.Instantiate(pfbullet.name, firepoint.position, firepoint.rotation);
         Rigidbody2D rbullet = bullet.GetComponent<Rigidbody2D>();
 
+
         spread = firepoint.up;
         spread.x = spread.x + (Random.Range(-1, 1) * bulletspread);
         spread.y = spread.y + (Random.Range(-1, 1) * bulletspread);
-        Debug.Log(spread);
+        //Debug.Log(spread);
         rbullet.AddForce(firepoint.up.normalized * bulletForce, ForceMode2D.Force);
         animator.SetTrigger("Attack");
         //Debug.Log("pew");
@@ -174,31 +208,49 @@ public class MovementScript : MonoBehaviour
         }
         else
         {
+            animator.SetBool("EnteringSpecial", false);
             fireReady2 = true;
             animator.SetBool("SpecialAttacking", false);
         }
 
 
     }
-    
+    void AutoRecharge()
+    {
+        if (spermCount < spermAmmo)
+        {
+            spermCount = spermCount + spermRate;
+        }
+    }
+    void UpdateUI()
+    {
+        spermcountnum.text = Mathf.RoundToInt(spermCount).ToString();
+        spermammonum.text = Mathf.RoundToInt(spermAmmo).ToString();
+        cumbar.value = spermCount;
+        orgiballcounter.text = orgiballCount.ToString();
+    }
     void FireSpecial()
     {
-        
-        animator.SetBool("SpecialAttacking", true);
-        if (animsprite.GetComponent<AnimationEventTrigger>().specialattacking){
-            animator.SetBool("EnteringSpecial", false);
-            Debug.Log("firespecial");
-            GameObject bullet = PhotonNetwork.Instantiate(pfspecial.name, specialpoint.position, specialpoint.rotation);
-            Rigidbody2D rbullet = bullet.GetComponent<Rigidbody2D>();
+        if (spermCount > 0)
+        {
+            animator.SetBool("SpecialAttacking", true);
+            if (animsprite.GetComponent<AnimationEventTrigger>().specialattacking)
+            {
+                animator.SetBool("EnteringSpecial", false);
+                Debug.Log("firespecial");
+                GameObject bullet = PhotonNetwork.Instantiate(pfspecial.name, specialpoint.position, specialpoint.rotation);
+                Rigidbody2D rbullet = bullet.GetComponent<Rigidbody2D>();
 
-            spread = specialpoint.up;
-            spread.x = spread.x + (Random.Range(-1, 1) * bulletspread);
-            spread.y = spread.y + (Random.Range(-1, 1) * bulletspread);
-            //Debug.Log(spread);
-            rbullet.AddForce(spread * specialforce, ForceMode2D.Force);
-            
+                spread = specialpoint.up;
+                spread.x = spread.x + (Random.Range(-1, 1) * bulletspread);
+                spread.y = spread.y + (Random.Range(-1, 1) * bulletspread);
+                //Debug.Log(spread);
+                rbullet.AddForce(spread * specialforce, ForceMode2D.Force);
 
+                spermCount = spermCount - 1;
+            }
         }
+        
     }
     void ProcessInputs()
     {

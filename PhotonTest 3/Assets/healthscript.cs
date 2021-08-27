@@ -22,13 +22,13 @@ public class healthscript : MonoBehaviour
 
     //UI
     public Slider hpbar;
-    public Slider cumbar;
+    
 
     private void Awake()
     {
         hpbar.maxValue = hp;
         hpi = hp;
-        maxhp.text = hp.ToString();
+        maxhp.text = Mathf.RoundToInt(hp).ToString();
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -39,12 +39,16 @@ public class healthscript : MonoBehaviour
             
             //Debug.Log(hpnumber.text);
         }
+        if (collision.gameObject.tag == "collectible")
+        {
+            gameObject.GetComponent<MovementScript>().PickUpBall();
+        }
     }
     private void FixedUpdate()
     {
         if (pv.IsMine)
         {
-            hpnumber.text = hpi.ToString();
+            hpnumber.text = Mathf.RoundToInt(hpi).ToString();
             hpbar.value = hpi;
             if (hpi < 0)
             {
