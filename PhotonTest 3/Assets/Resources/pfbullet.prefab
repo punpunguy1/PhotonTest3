@@ -204,8 +204,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ac70b031565baa4687bcee99f51b4b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 8144480658981581709}
+  self: {fileID: 8144480658981581709}
   delay: 100
+  destroyoncollsion: 1
+  tagname: bullet
+  destroyoncontact: 0
+  contacttag: 
 --- !u!58 &2140686579664079491
 CircleCollider2D:
   m_ObjectHideFlags: 0

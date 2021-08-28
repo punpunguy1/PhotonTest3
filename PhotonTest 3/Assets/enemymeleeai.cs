@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class enemymeleeai : MonoBehaviour
 {
-    public string gameobjectname;
+    public string playertagname;
     public Rigidbody2D rb;
     private GameObject player;
     public Vector2 playerpos;
@@ -17,7 +17,7 @@ public class enemymeleeai : MonoBehaviour
     void ProcessInputs()
     {
         
-        player = GameObject.Find(gameobjectname);
+        player = GameObject.FindGameObjectWithTag(playertagname);
         playerpos = player.transform.position;
     }
 
