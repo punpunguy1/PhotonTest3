@@ -341,10 +341,10 @@ MonoBehaviour:
   specialdelay: 1
   specialpoint: {fileID: 2403024003160472683}
   pfspecial: {fileID: 5167601004890997555, guid: 4ffa58007b109c34096bedcf6b4e01f6, type: 3}
-  specialforce: 1000
+  specialforce: 3000
   spermAmmo: 100
-  spermRate: 0.03
-  orgiballValue: 0.16
+  spermRate: 0.05
+  orgiballValue: 0.05
   cumbar: {fileID: 4735883886575333135}
   spermcountnum: {fileID: 5324558462448520057}
   spermammonum: {fileID: 6936357787692521693}
