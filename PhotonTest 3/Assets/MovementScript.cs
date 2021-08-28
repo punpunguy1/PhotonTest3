@@ -53,6 +53,8 @@ public class MovementScript : MonoBehaviour
     public Slider cumbar;
     public Text spermcountnum;
     public Text spermammonum;
+    public Text ping;
+    public Slider pingbar;
     
     public Text orgiballcounter;
 
@@ -78,6 +80,8 @@ public class MovementScript : MonoBehaviour
     public PhotonView view;
 
     //skills
+    public Text[] cooldownT;
+    public float[] abilitycost;
     int currentindex;
     public Slider[] abilitysliders;
     private float[] skilltimer;
@@ -111,11 +115,12 @@ public class MovementScript : MonoBehaviour
     }
     public void respawn()
     {
+        orgiballCount = 0;
         alive = true;
     }
     private void Update()
     {
-        UpdateUI();
+        
     }
     private void FixedUpdate()
     {
@@ -125,6 +130,7 @@ public class MovementScript : MonoBehaviour
             if (alive)
             {
                 Skills();
+                UpdateUI();
                 
                 GunMechanics();
                 ProcessInputs();
@@ -171,6 +177,7 @@ public class MovementScript : MonoBehaviour
             }
             
             UpdateSliders();
+            UpdateCDT();
 
         }
         
@@ -182,7 +189,9 @@ public class MovementScript : MonoBehaviour
         spermammonum.text = Mathf.RoundToInt(spermAmmo).ToString();
         cumbar.value = spermCount;
         orgiballcounter.text = orgiballCount.ToString();
-
+        float pingms = PhotonNetwork.GetPing();
+        ping.text = pingms.ToString() + " ms";
+        //pingbar.value = Mathf.RoundToInt(pingms / );
 
     }
             void UpdateSliders()
@@ -193,6 +202,21 @@ public class MovementScript : MonoBehaviour
             abilitysliders[currentindex].maxValue = skilltimes[currentindex];
             abilitysliders[currentindex].value = (skilltimes[currentindex] - (skilltimer[currentindex] - Time.time));
 
+        }
+    }
+            void UpdateCDT()
+    {
+        foreach (Text cd in cooldownT)
+        {
+            int cdt = Mathf.FloorToInt((skilltimer[currentindex] - Time.time));
+            if (skillready[currentindex]){
+                cooldownT[currentindex].text = " ";
+
+            }
+            else
+            {
+                cooldownT[currentindex].text = cdt.ToString();
+            }
         }
     }
 
@@ -258,9 +282,13 @@ public class MovementScript : MonoBehaviour
             {
                 if (skillready[0])
                 {
-                    firebullet();
-                    wait = firedelay;
-                    fireReady = false;
+                    if (spermCount > abilitycost[0])
+                    {
+                        firebullet();
+                        spermCount = spermCount - abilitycost[0];
+                        fireReady = false;
+                    }
+                    
                 }
                 
             }
@@ -328,7 +356,7 @@ public class MovementScript : MonoBehaviour
     }
             void FireSpecial()
     {
-        if (spermCount > 0)
+        if (spermCount > abilitycost[1])
         {
 
             animator.SetBool("SpecialAttacking", true);
@@ -347,8 +375,11 @@ public class MovementScript : MonoBehaviour
                 //Debug.Log(spread);
                 rbullet.AddForce(spread * specialforce, ForceMode2D.Force);
 
-                spermCount = spermCount - 1;
+                spermCount = spermCount - abilitycost[1];
             }
+        }
+        else {
+            animator.SetBool("SpecialAttacking", false);
         }
 
     }
