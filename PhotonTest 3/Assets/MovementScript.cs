@@ -55,6 +55,7 @@ public class MovementScript : MonoBehaviour
     public Text spermammonum;
     public Text ping;
     public Slider pingbar;
+    public GameObject pingfill;
     
     public Text orgiballcounter;
 
@@ -191,7 +192,20 @@ public class MovementScript : MonoBehaviour
         orgiballcounter.text = orgiballCount.ToString();
         float pingms = PhotonNetwork.GetPing();
         ping.text = pingms.ToString() + " ms";
-        //pingbar.value = Mathf.RoundToInt(pingms / );
+        pingbar.value = Mathf.RoundToInt(pingms / 50);
+        if (pingbar.value <= 1)
+        {
+            pingfill.GetComponent<Image>().color = new Color(107f/255f, 201f/255f, 93f/255f);
+        }
+        if (pingbar.value == 2)
+        {
+            pingfill.GetComponent<Image>().color = new Color(201f/255f, 197f/255f, 93f/255f);
+        }
+        if (pingbar.value >= 3)
+        {
+            pingfill.GetComponent<Image>().color = new Color(227f/255f, 56f/255f, 30f/255f);
+        }
+        
 
     }
             void UpdateSliders()
@@ -309,8 +323,8 @@ public class MovementScript : MonoBehaviour
 
 
         spread = firepoint.up;
-        spread.x = spread.x + (Random.Range(-1, 1) * bulletspread);
-        spread.y = spread.y + (Random.Range(-1, 1) * bulletspread);
+        spread.x = spread.x * (Random.Range(-1, 1) * bulletspread);
+        spread.y = spread.y * (Random.Range(-1, 1) * bulletspread);
         //Debug.Log(spread);
         rbullet.AddForce(firepoint.up.normalized * bulletForce, ForceMode2D.Force);
         skillready[0] = false;

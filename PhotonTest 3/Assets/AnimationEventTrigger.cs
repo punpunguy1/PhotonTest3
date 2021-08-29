@@ -8,13 +8,18 @@ public class AnimationEventTrigger : MonoBehaviour
     public AudioSource coo;
     public AudioSource ooo;
     public AudioSource oom;
+    public AudioSource come;
     public bool mute;
     public bool specialattacking;
     public void playwhy()
     {
         if (!whyhaveu.isPlaying)
         {
-            whyhaveu.Play();
+            if (!mute)
+            {
+                whyhaveu.Play();
+            }
+            
         }
         
     }
@@ -53,6 +58,15 @@ public class AnimationEventTrigger : MonoBehaviour
         }
         
 
+    }
+    public void playcome()
+    {
+       if (!mute)
+        {
+            come.Play();
+        }
+           
+        
     }
     public void SpecialAttack()
     {

@@ -20,6 +20,13 @@ public class healthscript : MonoBehaviour
     public Text maxhp;
     public PhotonView pv;
 
+    //audio
+    public bool mute;
+    public AudioSource hit1;
+    public AudioSource hit2;
+    public AudioSource hit3;
+    
+
     //UI
     public Slider hpbar;
     
@@ -36,12 +43,35 @@ public class healthscript : MonoBehaviour
         {
 
             hpi = hpi - collision.relativeVelocity.magnitude;
+            hit();
             
             //Debug.Log(hpnumber.text);
         }
         if (collision.gameObject.tag == "collectible")
         {
             gameObject.GetComponent<MovementScript>().PickUpBall();
+        }
+    }
+    public void hit()
+    {
+        if (!mute)
+        {
+            if (!hit1.isPlaying)
+            {
+                hit1.Play();
+            }
+            if (hit1.isPlaying)
+            {
+                if (!hit2.isPlaying)
+                hit2.Play();
+            }
+            if (hit2.isPlaying)
+            {
+                if (!hit3.isPlaying)
+                {
+                    hit3.Play();
+                }
+            }
         }
     }
     private void FixedUpdate()

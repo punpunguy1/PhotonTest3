@@ -3937,11 +3937,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1664579649994040247, guid: 8e37dc05f09418644a880eff8f3fb6e0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.0039968
+      value: 3.86
       objectReference: {fileID: 0}
     - target: {fileID: 1664579649994040247, guid: 8e37dc05f09418644a880eff8f3fb6e0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.11738491
+      value: 2.99
       objectReference: {fileID: 0}
     - target: {fileID: 1664579649994040247, guid: 8e37dc05f09418644a880eff8f3fb6e0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3978,6 +3978,14 @@ PrefabInstance:
     - target: {fileID: 2491643754714497760, guid: 8e37dc05f09418644a880eff8f3fb6e0, type: 3}
       propertyPath: m_Name
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 3194238490732202641, guid: 8e37dc05f09418644a880eff8f3fb6e0, type: 3}
+      propertyPath: sceneViewId
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4162918343852711885, guid: 8e37dc05f09418644a880eff8f3fb6e0, type: 3}
+      propertyPath: aggrodis
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e37dc05f09418644a880eff8f3fb6e0, type: 3}
