@@ -3985,7 +3985,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4162918343852711885, guid: 8e37dc05f09418644a880eff8f3fb6e0, type: 3}
       propertyPath: aggrodis
-      value: 15
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4162918343852711885, guid: 8e37dc05f09418644a880eff8f3fb6e0, type: 3}
+      propertyPath: moveSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4162918343852711885, guid: 8e37dc05f09418644a880eff8f3fb6e0, type: 3}
+      propertyPath: bulletspread
+      value: 40
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e37dc05f09418644a880eff8f3fb6e0, type: 3}
@@ -4388,7 +4396,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d16b1865d73ece4c9ac2e2be8019012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerprefab: {fileID: 668398742663562706, guid: 27c253a36b4393b4399456e038ec5d8c, type: 3}
+  playerprefab: {fileID: 8612083309684395758, guid: e97097c09e6315c4c8789ded75e4ae14, type: 3}
   orgiballpf: {fileID: 2291691919757766769, guid: 9e58bb9ba06abc24fa9974bec4abfb5a, type: 3}
   minX: -11
   minY: -5

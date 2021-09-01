@@ -102,7 +102,7 @@ GameObject:
   - component: {fileID: 4162918343852711885}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: bullet
+  m_TagString: enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -324,12 +324,13 @@ MonoBehaviour:
   playerpos: {x: 0, y: 0}
   rotation: 0
   moveSpeed: 1
-  aggrodis: 15
+  aggrodis: 5
   firepoint: {fileID: 448556953160902506}
-  bulletspread: 0.48
+  firepointrotation: -90
+  bulletspread: 10
   bulletForce: 1000
   projectile: {fileID: 5167601004890997555, guid: 4ffa58007b109c34096bedcf6b4e01f6, type: 3}
-  firecooldown: 0.1
+  firecooldown: 0.001
 --- !u!1 &5582055331736938275
 GameObject:
   m_ObjectHideFlags: 0

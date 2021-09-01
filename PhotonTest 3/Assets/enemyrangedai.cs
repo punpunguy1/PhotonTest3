@@ -15,6 +15,7 @@ public class enemyrangedai : MonoBehaviour
     private float dis2player;
     public float aggrodis;
     public Transform firepoint;
+    public float firepointrotation;
     public float bulletspread;
     public float bulletForce;
     public GameObject projectile;
@@ -38,6 +39,7 @@ public class enemyrangedai : MonoBehaviour
         dis2player = Vector3.Distance(rb.position, playerpos);
         if (dis2player < aggrodis)
         {
+            Debug.Log(dis2player + "  dis:" + aggrodis);
             rb.rotation = angle;
             Move();
             
@@ -54,22 +56,17 @@ public class enemyrangedai : MonoBehaviour
     {
         rb.velocity = new Vector2(lookDir.x * moveSpeed, lookDir.y * moveSpeed);
     }
-    // Start is called before the first frame update
+
     void Fire()
     {
-        Vector3 spread;
+        firepoint.localRotation = Quaternion.identity;
+        firepoint.Rotate(Vector3.forward, firepointrotation);
+        firepoint.Rotate(Vector3.forward, Random.Range(-bulletspread, bulletspread));
+
         GameObject bullet = PhotonNetwork.Instantiate(projectile.name, firepoint.position, firepoint.rotation);
         Rigidbody2D rbullet = bullet.GetComponent<Rigidbody2D>();
 
-
-        spread = firepoint.up;
-        spread.x = spread.x * (Random.Range(-1, 1) * bulletspread);
-        spread.y = spread.y * (Random.Range(-1, 1) * bulletspread);
-        //Debug.Log(spread);
         rbullet.AddForce(firepoint.up.normalized * bulletForce, ForceMode2D.Force);
-        
-
-        
-        //Debug.Log("pew");
     }
+
 }

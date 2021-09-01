@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9f5566ae9b37654fb153d95780278be, type: 3}
+  m_Name: AirWave
+  m_EditorClassIdentifier: 
+  Cooldowntime: 0.5
+  Damage: 0
+  skillforce: 1000
+  spread: 0
+  cost: 10
+  freezetime: 0
+  freezerot: 0
+  UseTrailingFreeze: 0
+  FireMultiple: 0
+  FireCount: 0
+  TimeInBetween: 0
+  FreezeTrail: 0
+  IsProjectile: 1
+  skillpf: {fileID: 7165689706787489141, guid: 180c2997bc6427a47b32b4f0f90680dd, type: 3}
+  skillsound: {fileID: 8300000, guid: 6140bb74e0ec33448bbee7a39b729bce, type: 3}

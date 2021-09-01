@@ -240,7 +240,7 @@ public class MovementScript : MonoBehaviour
         Vector2 move;
         move.x = Input.GetAxisRaw("Horizontal");
         move.y = Input.GetAxisRaw("Vertical");
-        rb.MovePosition(rb.position + move * moveSpeed * Time.fixedDeltaTime);
+        rb.MovePosition(rb.position + move.normalized * moveSpeed * Time.fixedDeltaTime);
         //rb.velocity = new Vector2(moveDirection.x * moveSpeed, moveDirection.y * moveSpeed);
     }
     void MoveCam()
@@ -323,8 +323,8 @@ public class MovementScript : MonoBehaviour
 
 
         spread = firepoint.up;
-        spread.x = spread.x * (Random.Range(-1, 1) * bulletspread);
-        spread.y = spread.y * (Random.Range(-1, 1) * bulletspread);
+        spread.x = spread.x * (Random.Range(-1f, 1f) * bulletspread);
+        spread.y = spread.y * (Random.Range(-1f, 1f) * bulletspread);
         //Debug.Log(spread);
         rbullet.AddForce(firepoint.up.normalized * bulletForce, ForceMode2D.Force);
         skillready[0] = false;
@@ -384,8 +384,8 @@ public class MovementScript : MonoBehaviour
 
 
                 spread = specialpoint.up;
-                spread.x = spread.x + (Random.Range(-1, 1) * bulletspread);
-                spread.y = spread.y + (Random.Range(-1, 1) * bulletspread);
+                spread.x = spread.x + (Random.Range(-1f, 1f) * bulletspread);
+                spread.y = spread.y + (Random.Range(-1f, 1f) * bulletspread);
                 //Debug.Log(spread);
                 rbullet.AddForce(spread * specialforce, ForceMode2D.Force);
 
@@ -409,7 +409,7 @@ public class MovementScript : MonoBehaviour
     {
         spermRate = spermRate + orgiballValue;
         orgiballCount = orgiballCount + 1;
-        Debug.Log("picked up ball");
+        //Debug.Log("picked up ball");
     }
  
 
